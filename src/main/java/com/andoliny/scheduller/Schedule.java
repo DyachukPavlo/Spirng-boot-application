@@ -43,9 +43,10 @@ public class Schedule {
         List<User> users = userService.findNewByDate(currdate);
         if(users.size()>0){
             journal.setAverAge(Averenger.getAverAge(users));
-            journal.setSexCount(Averenger.createSexList(users));
+            journal.setSexCount(Averenger.getProp(users, p->p.getUserData().getSex().getDescription()));
             journal.setUserCount(users.size());
-            journal.setNationCount(Averenger.createNatList(users));
+            journal.setNationCount(Averenger.getProp(users, p->p.getUserData().getNationality().getName()));
+            System.out.println(journal.getNationCount());
             journal.setCreateDate(currdate);
             journalService.save(journal);
         }
