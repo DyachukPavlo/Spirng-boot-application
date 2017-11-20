@@ -3,6 +3,7 @@ package com.andoliny.utils;
 import com.andoliny.model.entities.User;
 import org.json.JSONObject;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -19,7 +20,8 @@ public class Averenger {
         return jsonObject.toString();
     }
 
-    public static String createNatList(List<User> users){
+   /* Оставлю для истории
+    public static String createNatList(List<User> users, StringProperty stringProperty){
         List<String> items = users.stream()
                 .map(p -> p.getUserData().getNationality().getName())
                 .collect(Collectors.toList());
@@ -31,6 +33,12 @@ public class Averenger {
                 .map(p -> p.getUserData().getSex().getDescription())
                 .collect(Collectors.toList());
         return countItems(items);
+    }*/
+
+    public static String getProp(List<User> list, StringProperty<User> stringProperty){
+        List<String> s = new LinkedList<>();
+        list.forEach(p->s.add(stringProperty.getValue(p)));
+        return countItems(s);
     }
 
 }
